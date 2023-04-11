@@ -1,19 +1,21 @@
 import pytest
-import websockets
-import asyncio
-import json
+from helpers.connections import *
+
 
 @pytest.mark.asyncio
 async def test_add():
-    uri = "ws://app:4000"
-    async with websockets.connect(uri) as ws:
-        await ws.send('{"id": "12345", "method": "add", "name": "Jack", "surname": "Dorris", "phone": "2128507", "age": 30}')
-        repl = await ws.recv()
-        resp = json.loads(repl)
-        print(resp)
-        assert resp["id"] == "12345"
-        assert resp["method"] == "add"
-        assert resp["status"] == "success"
+    request_data = '{"id": "12egwe", "method": "add", "name": "Jack1", "surname": "Dorris1", "phone": "21285071", "age": 31}'
+    response = await send_request(request_data)
+    assert response["id"] == "12egwe"
+    assert response["method"] == "add"
+    assert response["status"] == "success"
 
-asyncio.get_event_loop().run_until_complete(test_add())
+@pytest.mark.asyncio
+async def test_add_duplicate():
+    request_data = '{"id": "123456", "method": "add", "name": "Jack", "surname": "Dorris", "phone": "2128507", "age": 30}'
+    response = await send_request(request_data)
+
+    assert response["id"] == "123456"
+    assert response["method"] == "add"
+    assert response["status"] == "failure"
 
