@@ -1,13 +1,9 @@
-version: "3.5"
-
 services:
   tests:
     build:
       context: .
     volumes:
       - ./:/usr/src/app
-    command:
-      - "/root/py/bin/pytest"
     depends_on:
       - app
 
@@ -17,4 +13,4 @@ services:
     command: ["bash", "-c", "./tester.so 0.0.0.0 4000"]
     working_dir: /app
     volumes:
-      - ./:/app
+      - ./src:/app
