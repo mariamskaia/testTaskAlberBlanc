@@ -3,12 +3,9 @@ import pytest
 from helpers.connections import send_request
 from helpers.test_data import *
 
-data_success = success_data()
-data_failure = failure_data()
-
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("payload", data_success)
+@pytest.mark.parametrize("payload", success_data())
 async def test_add_success(payload):
     response = await send_request(payload)
 
@@ -19,7 +16,7 @@ async def test_add_success(payload):
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("payload, failure_reason", data_failure)
+@pytest.mark.parametrize("payload, failure_reason", failure_data())
 async def test_add_failure(payload, failure_reason):
     response = await send_request(payload)
 

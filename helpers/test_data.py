@@ -45,6 +45,16 @@ def success_data():
             "age": 34
         }),  # add duplicate age
 
+        ({
+            "id": "kjeв9fm-53vhc",
+            "method": "add",
+            "name": "TestName543",
+            "surname": "TestSurname245",
+            "phone": "567864792",
+            "email": "testmail@mail.com",
+            "age": 19
+        }),  # add with extra field
+
         # add more cases here...
     ]
 
